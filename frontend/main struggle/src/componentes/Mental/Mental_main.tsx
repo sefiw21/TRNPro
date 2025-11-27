@@ -7,13 +7,130 @@ import { Buttns } from "../laye_out_components/buttuns";
 const Mental_main = () => {
   const navigate = useNavigate();
   return (
- <div className={`bg-[url('/src/assets/images/mental.png')] flex flex-col items-center justify-center bg-cover p-8 rounded-lg`}>
+ <div className={`bg-[url('/src/assets/images/mental.png')] bg-fixed flex flex-col bg-ata items-center justify-center bg-fite p-8`}>
      <FilterProvider>
    <Buttns
         text="Go to Reading Section"
         onClick={() => navigate("/reading")}
       />
       <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
+        text="Go to Oral Lessons"
+        onClick={() => navigate("/oral-lessons")}
+      />    <Buttns
         text="Go to Oral Lessons"
         onClick={() => navigate("/oral-lessons")}
       />

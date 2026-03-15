@@ -1,0 +1,31 @@
+{
+  "typescript.preferences.autoImportFileExcludePatterns": [],
+  "typescript.suggest.autoImports": true,
+  "typescript.preferences.includePackageJsonAutoImports": "auto",
+  "javascript.suggest.autoImports": true,
+  "editor.quickSuggestions": {
+    "strings": true,
+    "other": true,
+    "comments": false
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always",
+
+    "source.fixAll": "explicit"
+  },
+  "emmet.includeLanguages": {
+    "typescript": "html",
+    "typescriptreact": "html"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "notebook.lineNumbers": "on",
+  "search.showLineNumbers": true
+  // "prettier.printWidth": 100,
+  // "typescript.format.enable": true,
+  // "editor.wordWrap": "off",
+  // "editor.rulers": [100]
+}

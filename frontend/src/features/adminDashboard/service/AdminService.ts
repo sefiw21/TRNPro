@@ -1,6 +1,6 @@
 import { api } from "../../../api/axiosClient.ts";
 import type { ApiResponse, User } from "../../../types";
-import type { SignupType } from "../../auth/schemas.tsx";
+import type { SignupType } from "../../auth/schemas/auth.schema.ts";
 export const AdminServiceAPI = {
   async getAllUsers(): Promise<ApiResponse<User[]>> {
     const response = await api.get<ApiResponse<User[]>>("auth/getAllUsers");

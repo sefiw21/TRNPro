@@ -5,9 +5,9 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>main-struggle</title>
+
     <style>
       body {
-        background-image: url("/src/assets/bigHome.jpg");
         background-size: cover;
         margin: 0;
         font-family:
@@ -22,6 +22,29 @@
           source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
       }
     </style>
+
+    <script>
+      (function () {
+        try {
+          var store = localStorage.getItem("theme-store");
+          // Default to 'theme' (your favorite) if they haven't visited before
+          var theme = store ? JSON.parse(store).state.theme : "theme";
+
+          if (theme === "oled") {
+            document.documentElement.classList.add("dark");
+            document.documentElement.setAttribute("data-theme", "oled");
+          } else if (theme === "theme") {
+            document.documentElement.classList.add("dark");
+            document.documentElement.removeAttribute("data-theme");
+          } else {
+            document.documentElement.classList.add("light");
+            document.documentElement.removeAttribute("data-theme");
+          }
+        } catch (e) {
+          console.error("Theme script failed to load:", e);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

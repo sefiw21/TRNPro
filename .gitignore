@@ -3,8 +3,13 @@ node_modules/
 .env
 dist/
 client_secret_*.json
-# Ignore logs
-# npm-debug.log*
-# yarn-debug.log*
-# yarn-error.log**.mp4
+
+# Ignore mocks
+mocks/
+
+# Ignore videos
 *.mp4
+*.MP4
+
+# Ignore logs
+wget-log*

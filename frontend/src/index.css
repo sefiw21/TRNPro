@@ -1,46 +1,153 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: white transparent;
-}
+/* THE FIX: Correctly formatted custom variant wrapped in standard CSS nesting syntax */
+@custom-variant oled (&:where(html[data-theme="oled"], html[data-theme="oled"] *));
 
-*::-webkit-scrollbar {
-  @apply bg-transparent w-1 rounded-full;
-}
-*::-webkit-scrollbar-thumb {
-  @apply bg-gray-700/50 rounded-full;
-}
-
-.scrollbar-hidden::-webkit-scrollbar-thumb {
-  @apply bg-transparent;
-}
-.scrollbar-hidden:hover::-webkit-scrollbar-thumb {
-  @apply bg-gray-400/50;
-}
-
+/* -------------------------------------------------------------------------- */
+/* 1. DYNAMIC THEME TOKENS (Tailwind v4 Configuration)                        */
+/* -------------------------------------------------------------------------- */
 @theme {
-  --color-primary: #1e3a8a;
-  --color-primary-hover: #1e3a8a;
-  --color-secondary: gray;
-  --color-secondary-hover: #232323;
+  /* Map Tailwind classes to custom CSS variables */
+  --color-bg-main: var(--bg-main);
+  --color-text-main: var(--text-main);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
 }
 
-:root {
-  font-family: "Poppins", sans-serif;
-  color-scheme: dark;
+/* -------------------------------------------------------------------------- */
+/* 2. BASE STYLES & CONDITIONAL VALUING                                       */
+/* -------------------------------------------------------------------------- */
+@layer base {
+
+  /* Default / Light Mode Paint Bucket */
+  :root,
+  .light {
+    color-scheme: light;
+    --bg-main: #ffffff;
+    --text-main: #0f172a;
+
+    /* Light Mode Variations of your colors */
+    --primary: #1e3a8a;
+    --primary-hover: #172554;
+    --secondary: #6b7280;
+    --secondary-hover: #4b5563;
+
+    /* DYNAMIC SCROLLBARS: Dark gray so they are visible on a white background */
+    --scrollbar-thumb: rgba(15, 23, 42, 0.2);
+    --scrollbar-thumb-hover: rgba(15, 23, 42, 0.4);
+  }
+
+  /* Dark Mode Paint Bucket (Your Favorite Deep Blue Theme) */
+  .dark {
+    color-scheme: dark;
+    --bg-main: #0a1128;
+    /* Your beautiful deep dark blue background */
+    --text-main: #f8fafc;
+
+    /* Dark Mode Variations of your colors */
+    --primary: #3b82f6;
+    /* Shift to a brighter blue for visibility on dark backgrounds */
+    --primary-hover: #60a5fa;
+    --secondary: #94a3b8;
+    --secondary-hover: #cbd5e1;
+
+    /* DYNAMIC SCROLLBARS: Frosted white for dark backgrounds */
+    --scrollbar-thumb: rgba(255, 255, 255, 0.15);
+    --scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+  }
+
+  /* OLED Mode Base Fallbacks (Pure Black) */
+  html[data-theme="oled"] {
+    --bg-main: #000000;
+  }
+
+  html {
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    scrollbar-width: thin;
+
+    /* Using the new dynamic variable */
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Fixed Global Scrollbar Math */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    /* Using the new dynamic variable */
+    background-color: var(--scrollbar-thumb);
+    border-radius: 9999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    /* Using the new dynamic variable */
+    background-color: var(--scrollbar-thumb-hover);
+  }
 }
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Prevents the header from covering the section title */
-}
-/* In your index.css or globals.css */
+
+/* -------------------------------------------------------------------------- */
+/* 3. CUSTOM UTILITIES                                                        */
+/* -------------------------------------------------------------------------- */
 @layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+
+  /* Safest hover-scrollbar implementation */
+  .hover-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+
+  .hover-scrollbar:hover {
+    /* Using the new dynamic variable */
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
+
+  .hover-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .hover-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .hover-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 9999px;
+  }
+
+  /* Fade in the Webkit scrollbar on hover */
+  .hover-scrollbar:hover::-webkit-scrollbar-thumb {
+    /* Using the new dynamic variable */
+    background-color: var(--scrollbar-thumb);
+  }
+
+  .hover-scrollbar::-webkit-scrollbar-thumb:hover {
+    /* Using the new dynamic variable */
+    background-color: var(--scrollbar-thumb-hover);
   }
 }

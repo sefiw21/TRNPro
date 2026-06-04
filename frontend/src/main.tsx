@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { SidebarContextProvider } from "./components/layouts/sidebar/context/SidebarContext.tsx";
-import { AuthProvider } from "./providers/AuthProvider.tsx";
+import { AuthProvider } from "./features/auth/providers/AuthProvider.tsx";
 // import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./index.css";

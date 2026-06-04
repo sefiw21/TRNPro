@@ -1,10 +1,10 @@
-import { ArrowLeft, Bell, Search, Upload } from "lucide-react";
+import { ArrowLeft, Search } from "lucide-react";
 import { useState, type FormEvent } from "react";
 // import { useAuth } from "../../../providers/AuthProvider.tsx";
-import Button from "../../ui/Button.tsx";
-import Profile from "../../ui/Profile.tsx";
-import SearchBar from "../../ui/SearchBar.tsx";
+import { Button } from "../../Ui/forms/Button.tsx";
+import { GlobalUserActions } from "./GlobalUserActions.tsx";
 import { MenuBarAndLogo } from "./MenuBarAndLogo.tsx";
+import SearchBar from "./SearchBar.tsx";
 
 export const Header = () => {
   // const { isAuthenticated } = useAuth();
@@ -19,10 +19,17 @@ export const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 h-16 md:h-20 px-4 md:px-6 flex gap-4 justify-between items-center bg-[#020617]/80 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
+    <header className="sticky top-0 z-50 h-16 md:h-20 px-2 md:px-3 flex gap-4 justify-between items-center backdrop-blur-xl border-b transition-all duration-500
+      /* 1. Light Mode: Frosty white glass */
+      bg-white/80 border-slate-200
+      /* 2. Theme Mode: Deep blue glass */
+      dark:bg-[#020610]/80 dark:border-white/5
+      /* 3. OLED Mode: Pure black glass */
+      oled:bg-black/90 oled:border-white/5
+    ">
 
       {/* LEFT SECTION: Menu & Logo */}
-      <div className={`flex items-center shrink-0 ${fullWidthSearch ? "hidden" : "flex"}`}>
+      <div className={`${fullWidthSearch ? "hidden" : "flex"}`}>
         <MenuBarAndLogo hidden={fullWidthSearch} />
       </div>
 
@@ -38,7 +45,11 @@ export const Header = () => {
             type="button"
             size="icon"
             variant="ghost"
-            className="shrink-0 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors"
+            className="shrink-0 rounded-full transition-colors duration-300
+              text-slate-500 hover:text-slate-900 hover:bg-slate-200/50
+              dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/10
+              oled:text-slate-500 oled:hover:text-white oled:hover:bg-white/10
+            "
             aria-label="Go back"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -47,6 +58,7 @@ export const Header = () => {
 
         <div className="flex flex-1 gap-2 items-center w-full">
           <div className="flex-1 w-full">
+            {/* Make sure your SearchBar component is imported and used here! */}
             <SearchBar search={search} setSearch={setSearch} />
           </div>
         </div>
@@ -63,43 +75,18 @@ export const Header = () => {
             onClick={() => setFullWidthSearch(true)}
             size="icon"
             variant="ghost"
-            className="text-slate-400 hover:text-white hover:bg-white/10 rounded-full"
+            className="rounded-full transition-colors duration-300
+              text-slate-500 hover:text-slate-900 hover:bg-slate-200/50
+              dark:text-slate-400 dark:hover:text-white dark:hover:bg-white/10
+              oled:text-slate-500 oled:hover:text-white oled:hover:bg-white/10
+            "
             aria-label="Open search"
           >
             <Search className="w-5 h-5" />
           </Button>
         </div>
-
-        {/* Desktop Icons */}
-        <div className="hidden md:flex items-center gap-1.5">
-          <Button
-            size="icon"
-            variant="ghost"
-            className="text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors"
-            aria-label="Upload video"
-          >
-            <Upload className="w-5 h-5" />
-          </Button>
-          <Button
-            size="icon"
-            variant="ghost"
-            className="relative text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors"
-            aria-label="Notifications"
-          >
-            <Bell className="w-5 h-5" />
-            {/* Unread Notification Indicator */}
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-amber-500 rounded-full border border-[#020617]"></span>
-          </Button>
-        </div>
-
-        {/* Vertical Divider */}
-        <div className="hidden md:block h-8 w-px bg-white/10 mx-2" />
-
-        {/* Profile (FIX: added shrink-0 so it never squishes) */}
-        <div className="shrink-0">
-          <Profile />
-        </div>
+        <GlobalUserActions />
       </div>
-    </header>
+    </header >
   );
 };

@@ -1,8 +1,8 @@
 import { LogOut as LogOutIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import Button from "../../../components/ui/Button.tsx";
-import { useAuth } from "../../../providers/AuthProvider.tsx";
+import { Button } from "../../../components/Ui/forms/Button.tsx";
+import { useAuth } from "../providers/AuthProvider.tsx";
 import { userAPI } from "../service/auth.service.ts";
 
 interface LogOutProps {
@@ -33,7 +33,7 @@ const LogOut = ({ text = "Log Out", size }: LogOutProps) => {
       onClick={handleLogout}
       className={twMerge(
         // 1. BASE: Always w-full. Absolute context for choreography.
-        "block relative mb-3 transition-all duration-500 ease-in-out group border-none overflow-hidden w-full",
+        "block relative transition-all duration-500 ease-in-out group border-none overflow-hidden w-full",
 
         // 2. HEIGHT MORPH: Smoothly adjust the height of the button container
         size === "l" ? "h-12 rounded-2xl" : "h-16 rounded-2xl",
@@ -50,7 +50,6 @@ const LogOut = ({ text = "Log Out", size }: LogOutProps) => {
           size === "l"
             ? "left-4 top-[50%] translate-x-0 -translate-y-[50%] w-5 h-5"
             : "left-[50%] top-2.5 -translate-x-[50%] translate-y-0 w-6 h-6",
-          // Scale up slightly and turn rose on hover
           "group-hover:text-rose-400 group-hover:scale-110"
         )}
         strokeWidth={2}

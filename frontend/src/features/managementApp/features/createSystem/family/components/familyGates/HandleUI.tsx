@@ -1,7 +1,7 @@
+import { studentAPI } from "@/api/S_api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useState, type ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
-import { studentAPI } from "../../../../../api/S_api";
 import {
   BATCH_YEARS,
   departments,

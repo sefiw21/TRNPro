@@ -1,7 +1,7 @@
 
 import Profile from "@/features/profile/Profile";
 import { Bell } from "lucide-react";
-import { Button } from "../../Ui/forms/Button";
+import { Button } from "../../../Ui/forms/Button";
 import { TaskbarMenu } from "./TaskbarMenu";
 
 export function GlobalUserActions() {

@@ -3,8 +3,7 @@ import App from "../App.tsx";
 import AdminDashboard from "../features/adminDashboard/AdminDashboard.tsx";
 import LogIn from "../features/auth/components/LogIn.tsx";
 import SignUp from "../features/auth/components/SignUp.tsx";
-import Gates from "../features/managementApp/family/components/familyGates/Gates.tsx";
-import Manage_Students from "../features/managementApp/family/GetUser/Manage_Students.tsx";
+
 import OralApp from "../features/mental/learn_oral/OralApp.tsx";
 import { LibraryApp } from "../features/mental/library/LibraryApp.tsx";
 import MainContent from "../features/mental/library/MainContent.tsx";
@@ -16,8 +15,12 @@ import Prayer from "../features/spiritual/Prayer.tsx";
 import Spritual_main from "../features/spiritual/Spritual_main.tsx";
 import Home from "../pages/Home.tsx";
 
-import Management from "../features/managementApp/family/GetUser/Manage_Students.tsx";
-import ManagenentApp from "../features/managementApp/ManagenentApp.tsx";
+
+import CreatSystem from "@/features/managementApp/features/createSystem/CreatSystem.tsx";
+import Gates from "@/features/managementApp/features/createSystem/family/components/familyGates/Gates.tsx";
+import Manage_Students from "@/features/managementApp/features/createSystem/family/GetUser/Manage_Students.tsx";
+import ManagenentApp from "@/features/managementApp/ManagenentApp.tsx";
+import MHome from "@/features/managementApp/pages/MHome.tsx";
 import NotFoundPage from "../NotFoundPage.tsx";
 import LandingPageApp from "../pages/LandingPage.tsx";
 import { ProtectedRoute } from "./ProtectedRoute.tsx";
@@ -93,8 +96,8 @@ export const router = createBrowserRouter([
         path: "/management",
         element: <ManagenentApp />,
         children: [
-          { index: true, element: <Management /> },
-          { path: "Gates", element: <Gates /> },
+          { index: true, element: <MHome /> },
+          { path: "createSystem", element: <CreatSystem /> },
         ],
       },
       {

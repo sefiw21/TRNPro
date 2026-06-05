@@ -1,9 +1,10 @@
+import SearchBar from "@/components/layouts/header/components/SearchBar.tsx";
 import User_Detail_Modal from "@/components/Ui/feedback/Modal.tsx";
 import { motion, type Variants } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
-import { studentAPI } from "../../../../api/S_api.ts";
-import SearchBar from "../../../../components/layouts/header/SearchBar.tsx";
-import Students_Cards from "../../../../components/Ui/Cards.tsx";
+
+import { studentAPI } from "@/api/S_api.ts";
+import Students_Cards from "@/components/Ui/Cards.tsx";
 import TableComponent from "../components/StudentsTable.tsx"; // Rename import to avoid conflict
 import SinglUser from "./SinglUser.tsx";
 // import { Table as TableIcon } from "lucide-react"; // Import icon with alias if needed

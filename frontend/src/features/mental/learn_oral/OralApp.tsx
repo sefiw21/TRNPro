@@ -1,15 +1,15 @@
 import { MoreVertical, PlayCircle } from "lucide-react";
-import v1 from "../../../mocks /vodeos/v1.mp4";
-import v10 from "../../../mocks /vodeos/v10.mp4";
-import v11 from "../../../mocks /vodeos/v11.mp4";
-import v2 from "../../../mocks /vodeos/v2.mp4";
-import v3 from "../../../mocks /vodeos/v3.mp4";
-import v4 from "../../../mocks /vodeos/v4.mp4";
-import v5 from "../../../mocks /vodeos/v5.mp4";
-import v6 from "../../../mocks /vodeos/v6.mp4";
-import v7 from "../../../mocks /vodeos/v7.mp4";
-import v8 from "../../../mocks /vodeos/v8.mp4";
-import v9 from "../../../mocks /vodeos/v9.mp4";
+import v1 from "../../../mocks/vodeos/v1.mp4";
+import v10 from "../../../mocks/vodeos/v10.mp4";
+import v11 from "../../../mocks/vodeos/v11.mp4";
+import v2 from "../../../mocks/vodeos/v2.mp4";
+import v3 from "../../../mocks/vodeos/v3.mp4";
+import v4 from "../../../mocks/vodeos/v4.mp4";
+import v5 from "../../../mocks/vodeos/v5.mp4";
+import v6 from "../../../mocks/vodeos/v6.mp4";
+import v7 from "../../../mocks/vodeos/v7.mp4";
+import v8 from "../../../mocks/vodeos/v8.mp4";
+import v9 from "../../../mocks/vodeos/v9.mp4";
 
 const localVideos = [
   {

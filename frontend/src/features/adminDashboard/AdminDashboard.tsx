@@ -1,7 +1,7 @@
-import { TaskbarMenu } from "@/components/layouts/header/TaskbarMenu.tsx";
+import { TaskbarMenu } from "@/components/layouts/header/components/TaskbarMenu.tsx";
 import { motion } from "framer-motion";
 import { Bell, ShieldAlert } from "lucide-react";
-import Logo from "../../components/layouts/header/Logo.tsx";
+import Logo from "../../components/layouts/header/components/Logo.tsx";
 import { BackButton, Button } from "../../components/Ui/forms/Button.tsx";
 import Profile from "../profile/Profile.tsx";
 import UsersTable from "./components/UsersTable.tsx";

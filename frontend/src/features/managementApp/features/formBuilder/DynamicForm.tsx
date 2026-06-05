@@ -1,4 +1,4 @@
-import { Checkbox, FormContainer, Input } from "@/components/Ui/forms/";
+import { Checkbox, FormContainer, Input, RadioButton } from "@/components/Ui/forms/";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Trash2 } from "lucide-react";
 import { useEffect } from "react";
@@ -10,7 +10,7 @@ const DynamicForm = () => {
         register,
         handleSubmit,
         formState: { errors },
-        control
+        control, watch
     } = useForm<FormSchema>({
         mode: "all",
         resolver: zodResolver(formSchema),
@@ -23,7 +23,13 @@ const DynamicForm = () => {
 
     const putCompanyLocations = useWatch({ control, name: "putCompanyLocations" })
     const putCompanyDescription = useWatch({ control, name: "putCompanyDescription" })
-    const fullErrors: FieldErrors<Extract<FormSchema, { putCompanyDescription: true }> & Extract<FormSchema, { putCompanyLocations: true }>> = errors
+    const educationLevel = useWatch({ control, name: "educationLevel" })
+
+    const fullErrors: FieldErrors<Extract<FormSchema, { putCompanyDescription: true }>> &
+        FieldErrors<Extract<FormSchema, { putCompanyLocations: true }>> &
+        FieldErrors<Extract<FormSchema, { educationLevel: "noFormalEducation" }>> &
+        FieldErrors<Extract<FormSchema, { educationLevel: "highSchoolDiploma" }>> &
+        FieldErrors<Extract<FormSchema, { educationLevel: "bachelorsDegree" }>> = errors
 
     const onSubmit: SubmitHandler<FormSchema> = (data) => {
         alert(JSON.stringify(data, null, 2));
@@ -41,12 +47,13 @@ const DynamicForm = () => {
             bg-slate-100 dark:bg-[#00020a] oled:bg-black
         ">
             <FormContainer title="Create simple imaginary management system for yous campony">
-                <form className="space-y-6">
-
+                <form className="space-y-6"
+                    onSubmit={handleSubmit(onSubmit)}>
+                    {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
                     {/* Compan Name Input */}
                     <div>
                         <Input
-                            placeholder="Location Name"
+                            placeholder="Company Name"
                             error={fullErrors.companyName?.message}
                             {...register(`companyName`)}
                             containerClassName="flex-1" // Ensures it takes up the right amount of space next to the delete button
@@ -63,9 +70,9 @@ const DynamicForm = () => {
                         <div className="pl-2 sm:pl-7 animate-in fade-in slide-in-from-top-2 duration-300">
 
                             <Input
-                                placeholder="Location Name"
+                                placeholder="Company Discription"
                                 error={fullErrors.companyDescription?.message}
-                                {...register(`companyDescription`)}
+                                {...register(`companyDescription`, { shouldUnregister: true })}
                                 containerClassName="flex-1" // Ensures it takes up the right amount of space next to the delete button
                             />
                         </div>
@@ -84,7 +91,7 @@ const DynamicForm = () => {
                                         <Input
                                             placeholder="Location Name"
                                             error={fullErrors.locations?.[index]?.name?.message}
-                                            {...register(`locations.${index}.name`)}
+                                            {...register(`locations.${index}.name`, { shouldUnregister: true })}
                                             containerClassName="flex-1" // Ensures it takes up the right amount of space next to the delete button
                                         />
                                     </div>
@@ -122,6 +129,42 @@ const DynamicForm = () => {
                         </div>
                     )}
 
+                    <h3 className="text-white font-semibold mb-2">Select Role</h3>
+                    <RadioButton
+                        label="No Formal Education"
+                        value="noFormalEducation"
+                        {...register("educationLevel")}
+                    />
+                    <RadioButton
+                        label="High School Diploma"
+                        value="highSchoolDiploma"
+                        {...register("educationLevel")}
+                    />
+                    {educationLevel === "highSchoolDiploma" && (
+                        <>
+                            <Input
+                                placeholder="School Name"
+                                error={fullErrors?.schoolName?.message}
+                                {...register("schoolName", { shouldUnregister: true })}
+                                containerClassName="flex-1"
+                            />
+                        </>
+
+                    )}
+
+                    <RadioButton
+                        label="Bachelors Degree"
+                        value="bachelorsDegree"
+                        {...register("educationLevel")}
+                    />
+                    {educationLevel === "bachelorsDegree" && (
+                        <Input
+                            placeholder="University Name"
+                            error={fullErrors?.universityName?.message}
+                            {...register("universityName", { shouldUnregister: true })}
+                            containerClassName="flex-1"
+                        />
+                    )}
                     {/* Submit Button */}
                     <button
                         onClick={handleSubmit(onSubmit)}
@@ -137,6 +180,9 @@ const DynamicForm = () => {
                     >
                         Create
                     </button>
+
+
+
                 </form>
             </FormContainer>
         </div>

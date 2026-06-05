@@ -1,11 +1,12 @@
 import { useLocation } from "react-router-dom";
 import {
+  managenentNavItems,
   mentalNavItems,
   physicalNavItems,
   spiritualNavItems,
   type NavItem,
 } from "../../Ui/Icons.tsx";
-import { MenuBarAndLogo } from "../header/MenuBarAndLogo.tsx";
+import { MenuBarAndLogo } from "../header/components/MenuBarAndLogo.tsx";
 import { SidebarFooter } from "./components/SidebarFooter.tsx";
 import { SidebarItem } from "./components/SidebarItem.tsx";
 import { SideBarSection } from "./components/SideBarSection.tsx";
@@ -22,6 +23,8 @@ const Sidebar = () => {
     currentNavItems = spiritualNavItems;
   } else if (location.pathname.startsWith("/physical")) {
     currentNavItems = physicalNavItems;
+  } else if (location.pathname.startsWith("/management")) {
+    currentNavItems = managenentNavItems;
   }
 
   return (
@@ -47,30 +50,6 @@ const Sidebar = () => {
       >
         <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain hover-scrollbar px-3 pt-2">
           {/* Note: Ensure your SideBarSection and SidebarItem components also use adaptive text colors */}
-          <SideBarSection visibleItemCount={2} title="title">
-            {currentNavItems.map((item, index) => (
-              <SidebarItem
-                size={isLargeOpen ? "l" : "s"}
-                key={index}
-                Icon={item.icon}
-                title={item.text}
-                url={item.url}
-                isActive={location.pathname === item.url}
-              />
-            ))}
-          </SideBarSection>
-          <SideBarSection visibleItemCount={3} title="title">
-            {currentNavItems.map((item, index) => (
-              <SidebarItem
-                size={isLargeOpen ? "l" : "s"}
-                key={index}
-                Icon={item.icon}
-                title={item.text}
-                url={item.url}
-                isActive={location.pathname === item.url}
-              />
-            ))}
-          </SideBarSection>
           <SideBarSection visibleItemCount={4} title="title">
             {currentNavItems.map((item, index) => (
               <SidebarItem
@@ -83,7 +62,8 @@ const Sidebar = () => {
               />
             ))}
           </SideBarSection>
-          <SideBarSection visibleItemCount={2} title="title">
+
+          <SideBarSection visibleItemCount={4} title="title">
             {currentNavItems.map((item, index) => (
               <SidebarItem
                 size={isLargeOpen ? "l" : "s"}
@@ -95,6 +75,7 @@ const Sidebar = () => {
               />
             ))}
           </SideBarSection>
+
           <SidebarFooter isLargeOpen={isLargeOpen} />
         </div>
       </aside>

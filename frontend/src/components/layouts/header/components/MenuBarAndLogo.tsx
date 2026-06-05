@@ -1,6 +1,6 @@
-import { Menu, X } from "lucide-react";
-import { Button } from "../../Ui/forms/Button.tsx";
-import { useSidebarContext } from "../sidebar/context/SidebarContext.tsx";
+import { Sidebar, X } from "lucide-react";
+import { Button } from "../../../Ui/forms/Button.tsx";
+import { useSidebarContext } from "../../sidebar/context/SidebarContext.tsx";
 import Logo from "./Logo.tsx";
 
 type MenuBarAndLogoProps = {
@@ -39,7 +39,7 @@ export const MenuBarAndLogo = ({
               strokeWidth={2}
             />
           ) : (
-            <Menu
+            <Sidebar
               className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300"
               strokeWidth={2}
             />

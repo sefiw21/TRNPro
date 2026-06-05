@@ -54,3 +54,12 @@ export const physicalNavItems: NavItem[] = [
   { icon: Coins, text: "Income & Stewardship", url: "/physical/Income" },
   { icon: Apple, text: "Nutrition", url: "/physical/nutrition" }, // Suggested addition
 ];
+
+export const managenentNavItems: NavItem[] = [
+  { icon: Home, text: " Home", url: "/Home" },
+  { icon: LayoutDashboard, text: "Management Dash Bord", url: "/management" }, // Index route
+  { icon: Stethoscope, text: "Sytems Created", url: "/management/systems" },
+  // { icon: Activity, text: "Prayer Walk", url: "/physical/Prayer" }, // Using Activity for physical prayer
+  // { icon: Coins, text: "Income & Stewardship", url: "/physical/Income" },
+  // { icon: Apple, text: "Nutrition", url: "/physical/nutrition" }, // Suggested addition
+];

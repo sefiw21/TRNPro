@@ -1,7 +1,7 @@
 import { MenuIcon, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../../components/layouts/header/Logo.tsx";
+import Logo from "../../../components/layouts/header/components/Logo.tsx";
 import { Button } from "../../../components/Ui/forms/Button.tsx";
 import { LnavItems } from "../utils/Items.ts";
 

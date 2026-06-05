@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Header } from "./components/layouts/header/Header.tsx";
+import { MainHeader } from "./components/layouts/header/components/MainHeader.tsx";
 import Sidebar from "./components/layouts/sidebar/Sidebar.tsx";
 import CategoryPills from "./components/Ui/CategoryPills.tsx";
 import { Categories } from "./types";
@@ -33,7 +33,7 @@ function App() {
           " />
         </div>
 
-        <Header />
+        <MainHeader />
 
         <div className="flex flex-1 overflow-hidden relative">
           <Sidebar />
@@ -59,7 +59,7 @@ function App() {
             </div>
 
             {/* Dynamic Route Content (The ONLY scrollable area) */}
-            <div className="flex-1 overflow-y-auto px-4 md:px-8 py-8 custom-scrollbar scroll-smooth">
+            <div className="flex overflow-y-auto lg:justify-center px-4 md:px-8 py-8 custom-scrollbar scroll-smooth">
               {/* The Outlet renders whatever page component the user navigated to */}
               <Outlet />
             </div>

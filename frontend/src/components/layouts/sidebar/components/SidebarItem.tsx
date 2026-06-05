@@ -32,10 +32,8 @@ export const SidebarItem = ({
       to={url}
       onClick={handleClick}
       className={twMerge(
-        "flex items-center relative transition-all duration-500 ease-in-out group border overflow-hidden w-full shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+        "flex items-center relative ease-in-out group border overflow-hidden w-full shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
         size === "l" ? "h-12 rounded-2xl" : "h-16 rounded-2xl",
-
-        // WRAPPER BACKGROUNDS & BORDERS ONLY
         isActive
           ? [
             "cursor-default shadow-sm",

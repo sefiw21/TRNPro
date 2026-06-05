@@ -1,7 +1,7 @@
+import { studentAPI } from "@/api/S_api";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-import { studentAPI } from "../../../../api/S_api";
 
 interface SinglUserprops {
   id: number | null;

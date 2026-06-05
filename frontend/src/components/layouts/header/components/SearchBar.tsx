@@ -1,5 +1,5 @@
+import { Button } from "@/components/Ui/forms";
 import { Mic } from "lucide-react";
-import { Button } from "../../Ui/forms/Button";
 
 interface SearchBarprops {
   search?: string;

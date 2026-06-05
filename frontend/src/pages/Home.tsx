@@ -1,11 +1,11 @@
-import { GlobalUserActions } from "@/components/layouts/header/GlobalUserActions.tsx";
+import { GlobalUserActions } from "@/components/layouts/header/components/GlobalUserActions.tsx";
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight, BarChart3, Brain, Cross, ExternalLink, Heart, LayoutDashboard } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import eoct from "../assets/eotc.png";
 import mk from "../assets/mk.png";
 import youtube from "../assets/youtube.png";
-import Logo from "../components/layouts/header/Logo.tsx";
+import Logo from "../components/layouts/header/components/Logo.tsx";
 import { BackButton } from "../components/Ui/forms/Button.tsx";
 import { useAuth } from "../features/auth/providers/AuthProvider.tsx";
 import { getUserRole } from "../utils/getUserRole.ts";

@@ -50,22 +50,25 @@ const formSchema = z.object({
     .and(companyLocationsSchema)
     .and(educationSchema);
 
-const systemFormSchema = z.object(
-    {
-        name: z.string().optional(),
-        description: z.string().optional(),
-        logo: z.file().optional().nullable()
-    }
-)
-type SystemFormData = z.infer<typeof systemFormSchema>
-type FormSchema = z.infer<typeof formSchema>
+const systemFormSchema = z.object({
+    name: z.string().min(1, "System name is required"),
+    type: z.enum(["family", "office"]).nullable(),
+    description: z.string().optional(),
+    logo: z.instanceof(File)
+        .or(z.string())
+        .optional()
+        .nullable()
+});
+type SystemFormDataType = z.infer<typeof systemFormSchema>
+type FormSchemaType = z.infer<typeof formSchema>
 
-const SystemFormDefaultValue: SystemFormData = {
+const SystemFormDefaultValue: SystemFormDataType = {
     name: "",
+    type: "family",
     description: "",
     logo: null
 }
-const formDefaultValue: FormSchema = {
+const formDefaultValue: FormSchemaType = {
     companyName: "",
     putCompanyDescription: false,
     putCompanyLocations: false,
@@ -74,8 +77,8 @@ const formDefaultValue: FormSchema = {
 
 export {
     formDefaultValue, formSchema, SystemFormDefaultValue, systemFormSchema,
-    type FormSchema,
-    type SystemFormData
+    type FormSchemaType,
+    type SystemFormDataType
 };
 
 

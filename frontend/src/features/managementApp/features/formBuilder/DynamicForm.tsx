@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Trash2 } from "lucide-react";
 import { useEffect } from "react";
 import { useFieldArray, useForm, useWatch, type FieldErrors, type SubmitHandler } from "react-hook-form";
-import { formDefaultValue, formSchema, type FormSchema } from "../schema/FormSchema";
+import { formDefaultValue, formSchema, type FormSchemaType } from "../../schema/FormSchema";
 
 const DynamicForm = () => {
     const {
@@ -11,7 +11,7 @@ const DynamicForm = () => {
         handleSubmit,
         formState: { errors },
         control, watch
-    } = useForm<FormSchema>({
+    } = useForm<FormSchemaType>({
         mode: "all",
         resolver: zodResolver(formSchema),
         defaultValues: formDefaultValue
@@ -25,13 +25,13 @@ const DynamicForm = () => {
     const putCompanyDescription = useWatch({ control, name: "putCompanyDescription" })
     const educationLevel = useWatch({ control, name: "educationLevel" })
 
-    const fullErrors: FieldErrors<Extract<FormSchema, { putCompanyDescription: true }>> &
-        FieldErrors<Extract<FormSchema, { putCompanyLocations: true }>> &
-        FieldErrors<Extract<FormSchema, { educationLevel: "noFormalEducation" }>> &
-        FieldErrors<Extract<FormSchema, { educationLevel: "highSchoolDiploma" }>> &
-        FieldErrors<Extract<FormSchema, { educationLevel: "bachelorsDegree" }>> = errors
+    const fullErrors: FieldErrors<Extract<FormSchemaType, { putCompanyDescription: true }>> &
+        FieldErrors<Extract<FormSchemaType, { putCompanyLocations: true }>> &
+        FieldErrors<Extract<FormSchemaType, { educationLevel: "noFormalEducation" }>> &
+        FieldErrors<Extract<FormSchemaType, { educationLevel: "highSchoolDiploma" }>> &
+        FieldErrors<Extract<FormSchemaType, { educationLevel: "bachelorsDegree" }>> = errors
 
-    const onSubmit: SubmitHandler<FormSchema> = (data) => {
+    const onSubmit: SubmitHandler<FormSchemaType> = (data) => {
         alert(JSON.stringify(data, null, 2));
     }
 

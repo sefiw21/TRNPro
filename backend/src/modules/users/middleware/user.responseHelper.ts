@@ -1,5 +1,5 @@
 import { type FastifyReply } from "fastify";
-import userService from "../user.service.js";
+import userService from "../user.Service.js";
 
 export const sendAuthSuccess = async (
   reply: FastifyReply,

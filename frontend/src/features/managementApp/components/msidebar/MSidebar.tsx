@@ -29,11 +29,11 @@ const MSidebar = () => {
         hidden lg:flex flex-col sticky top-16 md:top-20 left-0 
         z-50 
         h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] 
-         bg-white/40 border-r border-slate-200 text-slate-800 
+         bg-white border-r border-slate-200 text-slate-800 
         
-        dark:bg-transparent dark:border-white/5 dark:text-slate-200 
+        dark:bg-white/10 dark:border-white/4 dark:text-slate-200 
 
-        oled:bg-transparent oled:border-white/5 oled:text-slate-300
+        oled:bg-white/10 oled:border-white/5 oled:text-slate-300
         
         backdrop-blur-xl 
         shrink-0 transition-all duration-500 ease-in-out 
@@ -78,9 +78,9 @@ const MSidebar = () => {
                    
              bg-white/90 border-r border-slate-200 text-slate-800
               
-              dark:bg-[#020617]/80 dark:border-white/10 dark:text-slate-200
+              dark:bg-white/10 dark:border-white/10 dark:text-slate-200
               
-              oled:bg-black/90 oled:border-white/5 oled:text-slate-300
+              oled:bg-white/10 oled:border-white/5 oled:text-slate-300
               
               ${isSmallOpen ? "translate-x-0" : "-translate-x-full"}
             `}

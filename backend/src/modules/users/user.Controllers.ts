@@ -2,7 +2,7 @@ import { type FastifyReply, type FastifyRequest } from "fastify";
 import { authService } from "./middleware/authService.js";
 import { sendAuthSuccess } from "./middleware/user.responseHelper.js";
 import type { LoginInput, SignupInput, UserResponse } from "./user.Schema.js";
-import { default as userService } from "./user.service.js";
+import { default as userService } from "./user.Service.js";
 
 const userController = {
   async createUser(

@@ -1,5 +1,6 @@
 import fastifyCookie from "@fastify/cookie";
 import cors from "@fastify/cors";
+import fastifyMultipart from "@fastify/multipart";
 import dotenv from "dotenv";
 import fastify, { type FastifyError } from "fastify";
 import {
@@ -9,15 +10,23 @@ import {
 } from "fastify-type-provider-zod";
 import jwtPlugin from "./plugins/jwt.js";
 import { authRoutes } from "./routes/auth.js";
+import { managementRoutes } from "./routes/management.js";
 import { userRoutes } from "./routes/users.js";
 dotenv.config();
+
 export function buildApp() {
   // const app = fastify({ logger: true });
   const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>();
 
-  // SET THE COMPILERS (The "Translators")
   app.setValidatorCompiler(validatorCompiler);
   app.setSerializerCompiler(serializerCompiler);
+  app.register(fastifyMultipart);
+
+  app.register(jwtPlugin);
+  app.register(userRoutes, { prefix: "/api/users" });
+  app.register(authRoutes, { prefix: "/api/auth" });
+  app.register(managementRoutes, { prefix: "/api/management" });
+
 
   // Register CORS
   app.register(cors, {
@@ -34,9 +43,7 @@ export function buildApp() {
     secret: cookieSecrate, // Used to sign the cookie
     hook: "onRequest",
   });
-  app.register(jwtPlugin);
-  app.register(userRoutes, { prefix: "/api/users" });
-  app.register(authRoutes, { prefix: "/api/auth" });
+
 
   app.setErrorHandler((error: FastifyError, request, reply) => {
     //CATCH ZOD VALIDATION ERRORS SPECIFICALLY

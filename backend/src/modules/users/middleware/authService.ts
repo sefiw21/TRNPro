@@ -1,5 +1,5 @@
 import { verify } from "argon2";
-import userModel from "../user.service.js";
+import userModel from "../user.Service.js";
 
 export const authService = {
   async validateUser(email: string, password: string) {

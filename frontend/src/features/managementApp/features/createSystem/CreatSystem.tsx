@@ -1,59 +1,87 @@
 import { ArrowRight, Building2Icon, Users } from 'lucide-react';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { twMerge } from 'tailwind-merge';
-import type { SystemFormData } from '../../schema/FormSchema';
+import type { SystemFormDataType } from '../../schema/FormSchema';
+import { managementAPI } from '../../service/management.service';
 import ModalForm from './components/ModalForm';
 import SystemDetailModal from './components/SystemDetailModal';
+import { useCreateSystemStore } from './store/useCreateSystemStore';
 
 
-interface SystemTemplate {
+interface Systemcard {
     type: "family" | "office";
     title: string;
     shortDescription: string;
     icon: React.ReactNode;
     colorTheme: string; // Used for subtle background glows
 }
+const card: Systemcard[] = [
+    {
+        type: "family",
+        title: "Family Structure",
+        shortDescription: "A flat, collaborative environment with shared permissions and fluid roles.",
+        icon: <Users className="w-8 h-8" />,
+        colorTheme: "from-emerald-500/10 to-teal-500/5 dark:from-emerald-500/20 dark:to-teal-500/5"
+    },
+    {
+        type: "office",
+        title: "Office Structure",
+        shortDescription: "A formal hierarchy with strict department boundaries and approval chains.",
+        icon: <Building2Icon className="w-8 h-8" />,
+        colorTheme: "from-blue-500/10 to-indigo-500/5 dark:from-blue-500/20 dark:to-indigo-500/5"
+    }
+];
 
 const CreatSystem = () => {
-    // State to track which template the user clicked to view details
-    const [selectedTemplateType, setSelectedTemplateType] = useState<"family" | "office" | null>(null);
-    const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-    const [isFormModalOpen, setIsFormModalOpen] = useState(false);
+    const {
+        selectedType,
+        isDetailModalOpen,
+        isFormModalOpen,
+        closeDetails,
+        closeForm,
+        openDetails,
+        proceedToForm
+    } = useCreateSystemStore();
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleFinalSubmit = (data: SystemFormData) => {
-        console.log("Creating System:", { type: selectedTemplateType, ...data });
-        // Add your API call here!
-    };
-    // 2. User clicks "Customize & Create" inside the Detail Modal
-    const handleProceedToForm = (type: "family" | "office") => {
-        setIsDetailModalOpen(false); // Close the details
+    const handleFinalSubmit = async (data: SystemFormDataType) => {
+        const formData = new FormData();
+        setIsSubmitting(true);
 
-        // Use a tiny timeout to allow the first modal to fade out smoothly 
-        // before fading in the second one (prevents jarring visual jumps)
-        setIsFormModalOpen(true);
+        try {
+            // 1. Mandatory Fields
+            formData.append("name", data.name.trim());
+            formData.append("type", data.type!);
 
-    };
-    // The minimal data shown on the main cards
-    const templates: SystemTemplate[] = [
-        {
-            type: "family",
-            title: "Family Structure",
-            shortDescription: "A flat, collaborative environment with shared permissions and fluid roles.",
-            icon: <Users className="w-8 h-8" />,
-            colorTheme: "from-emerald-500/10 to-teal-500/5 dark:from-emerald-500/20 dark:to-teal-500/5"
-        },
-        {
-            type: "office",
-            title: "Office Structure",
-            shortDescription: "A formal hierarchy with strict department boundaries and approval chains.",
-            icon: <Building2Icon className="w-8 h-8" />,
-            colorTheme: "from-blue-500/10 to-indigo-500/5 dark:from-blue-500/20 dark:to-indigo-500/5"
+            // 2. Optional Fields (Only append if they exist)
+            if (data.description?.trim()) {
+                formData.append("description", data.description.trim());
+            }
+
+            // 3. File Fields
+            if (data.logo instanceof File) {
+                formData.append("logo", data.logo);
+            }
+
+            // --- PROFESSIONAL DEBUGGING ---
+            // You can leave this in development, but remove for production
+            if (import.meta.env.DEV) {
+                for (let [key, value] of formData.entries()) {
+                    console.log(`[FormData Entry] ${key}:`, value);
+                }
+            }
+            // ------------------------------
+
+            await managementAPI.createSystem(formData);
+            toast.success("System created successfully!");
+            closeForm();
+        } catch (error) {
+            console.error("Submission failed:", error);
+            toast.error("Submission failed. Please try again.");
+        } finally {
+            setIsSubmitting(false);
         }
-    ];
-
-    const handleTemplateClick = (type: "family" | "office") => {
-        setSelectedTemplateType(type);
-        setIsDetailModalOpen(true);
     };
 
     return (
@@ -71,11 +99,11 @@ const CreatSystem = () => {
 
             {/* Template Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {templates.map((template) => (
+                {card.map((card) => (
                     <button
-                        key={template.type}
+                        key={card.type}
                         type="button"
-                        onClick={() => handleTemplateClick(template.type)}
+                        onClick={() => openDetails(card.type)}
                         className={twMerge(
                             "group relative flex flex-col items-start text-left w-full h-full rounded-2xl border-2 transition-all duration-300 outline-none overflow-hidden hover:-translate-y-1 hover:shadow-xl",
 
@@ -91,22 +119,22 @@ const CreatSystem = () => {
                     >
                         {/* Visual Banner Area (Acts like an image thumbnail) */}
                         <div className={twMerge(
-                            "w-full p-8 flex items-center justify-center bg-gradient-to-br border-b transition-colors",
-                            template.colorTheme,
+                            "w-full p-8 flex items-center justify-center bg-linear-to-br border-b transition-colors",
+                            card.colorTheme,
                             "border-slate-100 dark:border-white/5 oled:border-white/10 oled:bg-none oled:bg-white/5 group-hover:oled:bg-white/10"
                         )}>
                             <div className="p-4 rounded-full bg-white dark:bg-slate-800 oled:bg-black shadow-sm text-slate-700 dark:text-slate-200 oled:text-white group-hover:scale-110 transition-transform duration-300">
-                                {template.icon}
+                                {card.icon}
                             </div>
                         </div>
 
                         {/* Text Content Area */}
                         <div className="p-6 w-full flex flex-col flex-1">
                             <h3 className="text-lg font-bold text-slate-900 dark:text-white oled:text-white mb-2">
-                                {template.title}
+                                {card.title}
                             </h3>
                             <p className="text-sm text-slate-500 dark:text-slate-400 oled:text-slate-400 leading-relaxed mb-6 flex-1">
-                                {template.shortDescription}
+                                {card.shortDescription}
                             </p>
 
                             {/* "View Details" Call to Action */}
@@ -122,23 +150,48 @@ const CreatSystem = () => {
             {/* The Detail Modal */}
             <SystemDetailModal
                 isOpen={isDetailModalOpen}
-                onClose={() => setIsDetailModalOpen(false)}
-                systemType={selectedTemplateType}
-                onConfirmProceed={handleProceedToForm}
+                onClose={() => closeDetails()}
+                systemType={selectedType}
+                onConfirmProceed={proceedToForm}
             />
-            {setIsFormModalOpen && (
+            {selectedType !== null && (
                 < ModalForm
                     isOpen={isFormModalOpen}
-                    onClose={() => setIsFormModalOpen(false)}
-                    systemType={selectedTemplateType || "office"} // Fallback to prevent typescript errors
+                    onClose={() => closeForm()}
+                    systemType={selectedType || null}
                     onSubmit={handleFinalSubmit}
+                    isSubmitting={isSubmitting}
                 />
             )}
 
-
-
+            <button
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+                onClick={() => toast.success('Data saved successfully!')}
+            >
+                Save
+            </button>
+            { }<button className="bg-blue-500 text-white px-4 py-2 rounded"
+                onClick={() => triggerCustomToast()}
+            >
+                close
+            </button>
         </div>
     );
 };
-
+const triggerCustomToast = () => {
+    toast.custom((t) => (
+        <div
+            className={`${t.visible ? 'animate-enter' : 'animate-leave'
+                } max-w-md w-full bg-white shadow-2xl rounded-xl pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+        >
+            <div className="flex-1 w-0 p-4">
+                <p className="text-sm font-medium text-gray-900">Custom Tailwind Toast</p>
+                <p className="mt-1 text-sm text-gray-500">This uses full Tailwind classes!</p>
+            </div>
+            <button onClick={() => toast.dismiss(t.id)} className="p-4 text-blue-500 font-bold">
+                Close
+            </button>
+        </div>
+    ));
+};
 export default CreatSystem;

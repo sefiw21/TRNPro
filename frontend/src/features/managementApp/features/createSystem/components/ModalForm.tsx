@@ -69,18 +69,18 @@ const ModalForm = ({ isOpen, isSubmitting, onClose, systemType, onSubmit }: Moda
                         </label>
                         <input
                             type="text"
-                            {...register("name")}
+                            {...register("orgName")}
                             placeholder={namePlaceholder}
                             className={twMerge(
                                 "w-full px-4 py-3 text-sm rounded-xl border outline-none transition-all duration-200",
                                 "focus:ring-4 focus:ring-blue-500/10",
-                                errors.name
+                                errors.orgName
                                     ? "border-red-500 focus:border-red-500"
                                     : "border-slate-200 focus:border-blue-500 dark:border-white/10",
                                 "bg-slate-50 dark:bg-slate-950 dark:text-white oled:bg-black"
                             )}
                         />
-                        {errors.name && <p className="text-xs font-medium text-red-500">{errors.name.message}</p>}
+                        {errors.orgName && <p className="text-xs font-medium text-red-500">{errors.orgName.message}</p>}
                     </div>
 
                     {/* Logo Uploader */}
@@ -92,7 +92,7 @@ const ModalForm = ({ isOpen, isSubmitting, onClose, systemType, onSubmit }: Moda
                             render={({ field }) => (
                                 <MediaUploader
                                     mediaType="image"
-                                    maxSizeMB={2}
+                                    maxSizeMB={10}
                                     acceptedFormats={{ 'image/*': ['.jpeg', '.jpg', '.png', '.svg', '.gif'] }}
                                     value={typeof field.value === 'string' ? null : field.value}
                                     onFileChange={(file) => { field.onChange(file); field.onBlur(); }}

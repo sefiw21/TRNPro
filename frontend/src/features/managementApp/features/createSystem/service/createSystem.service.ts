@@ -1,7 +1,7 @@
 import { fileApi } from "@/api/axiosClient";
 import type { Company, MApiResponse } from "../types/createSystemtype";
 
-export const managementAPI = {
+export const createSystemAPI = {
 
     async createSystem(formData: FormData): Promise<Company> {
         if (import.meta.env.DEV) {
@@ -14,7 +14,7 @@ export const managementAPI = {
                 "/management/createSystem",
                 formData
             );
-
+            console.log(data)
             return data.data!;
         } catch (error: any) {
 

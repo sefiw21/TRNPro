@@ -7,7 +7,7 @@ import type { SignupInput, UpdateUserData } from "./user.Schema.js";
 const userService = {
   // Create a new user using Drizzle
   async createUser(userData: SignupInput) {
-    const { fullName, email, password } = userData;
+    const { fullName, email, phone, password } = userData;
     try {
       const hashedPassword = await secureHash(password);
       const [newUser] = await db
@@ -15,12 +15,14 @@ const userService = {
         .values({
           fullName,
           email,
+          phone,
           passwordHash: hashedPassword,
         })
         .returning({
           id: users.id,
           fullName: users.fullName,
           email: users.email,
+          phone: users.phone,
           profilePicture: users.profilePicture,
           createdAt: users.createdAt,
           updatedAt: users.updatedAt,
@@ -28,7 +30,6 @@ const userService = {
       console.log("newUser: ", newUser);
       return newUser;
     } catch (error) {
-      // console.error("Error in creating user:", error);
       throw error;
     }
   },

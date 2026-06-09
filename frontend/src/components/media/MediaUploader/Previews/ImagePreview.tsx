@@ -1,4 +1,3 @@
-// Previews/ImagePreview.tsx
 import { Upload, X } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 import type { PreviewProps } from '../types';
@@ -33,7 +32,6 @@ export const ImagePreview = ({
             )}>
                 <img
                     src={previewUrl}
-                    // If it's a File, use the name. If it's a string (URL), use a fallback string.
                     alt={file instanceof File ? file.name : "System Logo"}
                     className={twMerge("w-full h-full pointer-events-none", fitClasses[previewFit])}
                 />

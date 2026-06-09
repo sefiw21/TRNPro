@@ -12,8 +12,8 @@ const userController = {
     try {
       console.log("the request reached controller.ts file ");
 
-      const { fullName, email, password } = request.body;
-      const userData = { fullName, email, password };
+      const { fullName, email, phone, password } = request.body;
+      const userData = { fullName, email, phone, password };
       console.log("userData: ", userData);
       const newUser: UserResponse = await userService.createUser(userData);
       if (newUser) {

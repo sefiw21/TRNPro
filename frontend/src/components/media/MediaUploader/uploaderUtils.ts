@@ -1,5 +1,7 @@
 
-export const validateFile = (value: string | File | null, maxSizeMB: number = 5): string | null => {
+
+
+export const validateFile = (value: string | File | null, maxSizeMB: number = 10): string | null => {
     // If it's a string, it's already in the DB, so it's valid!
     if (typeof value === 'string') return null;
 

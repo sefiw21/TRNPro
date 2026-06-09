@@ -1,7 +1,7 @@
 //  Core Model Types
 export interface Company {
     id: string;
-    companyName: string;
+    orgName: string;
     type: "family" | "office";
     logo?: string;
     description?: string;

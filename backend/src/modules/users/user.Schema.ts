@@ -1,63 +1,74 @@
 import { z } from "zod";
 
 // ==========================================
-// 1. INPUT SCHEMAS (What the user sends us)
+// 1. INPUT SCHEMAS
 // ==========================================
 
 export const signupSchema = z.object({
-  fullName: z.string().min(3, "Name too short"),
-  email: z.email("Invalid email "),
+
+  fullName: z.string().min(3, { message: "Name must be at least 3 characters" }),
+
+  email: z.string().email({ message: "Invalid email format" }).optional(),
+  phone: z.string().min(10, { message: "Phone number is too short" }).optional(),
+
   password: z
     .string()
-    .min(8)
-    .max(100, "Password is too long for security reasons"),
-});
+    .min(8, { message: "Password must be at least 8 characters" })
+    .max(100, { message: "Password is too long for security reasons" }),
+
+  googleId: z.string().optional(),
+})
+  .refine((data) => data.email || data.phone || data.googleId, {
+    message: "You must provide either an email, a phone number, or use Google Fast-Entry.",
+    path: ["email"],
+  });
+
 
 export const loginSchema = z.object({
-  email: z.email("Invalid email "),
-  password: z
-    .string()
-    .min(8)
-    .max(100, "Password is too long for security reasons"),
-});
+  email: z.string().email({ message: "Invalid email format" }).optional(),
+  phone: z.string().min(10, { message: "Phone number is too short" }).optional(),
+
+  password: z.string().min(8, { message: "Password must be at least 8 characters" }),
+})
+  .refine((data) => data.email || data.phone, {
+    message: "Please enter your email or phone number to log in.",
+    path: ["email"],
+  });
+
 
 export const googleLoginSchema = z.object({
-  token: z.string().min(1, "Google token is required"),
+  token: z.string().min(1, { message: "Google token is required" }),
 });
 
 // ==========================================
-// 2. OUTPUT SCHEMAS (What we send the user)
+// 2. OUTPUT SCHEMAS
 // ==========================================
 
-export const userResponseSchema = z
-  .object({
-    id: z.string(),
-    fullName: z.string(),
-    email: z.string(),
-    profilePicture: z.string().nullable(), // Nullish is perfect here (allows null or undefined)
-    createdAt: z.date(),
-    updatedAt: z.date(),
-  })
-  .optional();
+export const userResponseSchema = z.object({
+  id: z.string().uuid({ message: "Invalid user ID format" }),
+  fullName: z.string(),
+  email: z.string().nullable(),
+  phone: z.string().nullable(),
+  profilePicture: z.string().nullable(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+}).optional();
 
 // ==========================================
 // 3. TYPESCRIPT TYPES
 // ==========================================
 
-// Input Types
 export type SignupInput = z.infer<typeof signupSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type GoogleLoginInput = z.infer<typeof googleLoginSchema>;
-
-// Output Types
 export type UserResponse = z.infer<typeof userResponseSchema>;
 
-// Custom Types
 export type UpdateUserData = {
   fullName?: string;
   email?: string;
+  phone?: string;
   profilePicture?: string;
   passwordHash?: string;
   authProvider?: string;
-  refreshToken?: string | null; // NEW! (Allow null so we can delete it on logout)
+  refreshToken?: string | null;
 };

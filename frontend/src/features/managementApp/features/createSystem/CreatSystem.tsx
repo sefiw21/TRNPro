@@ -3,9 +3,9 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { twMerge } from 'tailwind-merge';
 import type { SystemFormDataType } from '../../schema/FormSchema';
-import { managementAPI } from '../../service/management.service';
 import ModalForm from './components/ModalForm';
 import SystemDetailModal from './components/SystemDetailModal';
+import { createSystemAPI } from './service/createSystem.service';
 import { useCreateSystemStore } from './store/useCreateSystemStore';
 
 
@@ -51,7 +51,7 @@ const CreatSystem = () => {
 
         try {
             // 1. Mandatory Fields
-            formData.append("name", data.name.trim());
+            formData.append("orgName", data.orgName.trim());
             formData.append("type", data.type!);
 
             // 2. Optional Fields (Only append if they exist)
@@ -64,16 +64,14 @@ const CreatSystem = () => {
                 formData.append("logo", data.logo);
             }
 
-            // --- PROFESSIONAL DEBUGGING ---
-            // You can leave this in development, but remove for production
-            if (import.meta.env.DEV) {
-                for (let [key, value] of formData.entries()) {
-                    console.log(`[FormData Entry] ${key}:`, value);
-                }
-            }
-            // ------------------------------
+            // You can leave this in development, remove for production
+            // if (import.meta.env.DEV) {
+            //     for (let [key, value] of formData.entries()) {
+            //         console.log(`[FormData Entry] ${key}:`, value);
+            //     }
+            // }
 
-            await managementAPI.createSystem(formData);
+            await createSystemAPI.createSystem(formData);
             toast.success("System created successfully!");
             closeForm();
         } catch (error) {

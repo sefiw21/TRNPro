@@ -1,60 +1,49 @@
 import "@fastify/multipart";
 import type { FastifyInstance } from "fastify";
-import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod";
+import { uploadSystemLogo } from "../services/cloudinary.service.js";
 
 export async function managementRoutes(fastify: FastifyInstance) {
-    fastify.setValidatorCompiler(validatorCompiler);
-    fastify.setSerializerCompiler(serializerCompiler);
-
     fastify.post("/createSystem", async (request, reply) => {
         try {
-            // 1. Ask Fastify for all the parts (text AND optional files)
+            console.log("you arriv backend !!!!!!!!!!!")
+
             const parts = request.parts();
-
-            // 2. Set up empty variables to hold our text data
-            let companyName = "";
-            let type = "";
+            let orgName = "";
             let description = "";
-            let fileUploaded = false;
+            let logoUrl = "";
+            let logoPublicId = ""
 
-            // 3. Loop through every piece of data React sent
             for await (const part of parts) {
-
                 if (part.type === 'file') {
-                    // WE FOUND A FILE!
-                    fileUploaded = true;
-                    console.log("📁 File Name:", part.filename);
-                    console.log("📁 File Type:", part.mimetype);
-
-                    // Drain the stream into memory for this test
-                    const buffer = await part.toBuffer();
-                    console.log("📁 File Size:", buffer.length, "bytes");
-
-                } else {
-                    // WE FOUND A TEXT FIELD!
-                    // Note: part.value is guaranteed to be here for text fields!
-                    if (part.fieldname === "companyName") companyName = part.value as string;
-                    if (part.fieldname === "type") type = part.value as string;
+                    if (part.fieldname === 'logo') {
+                        const uploadResult = await uploadSystemLogo(part.file);
+                        logoUrl = uploadResult.url;
+                        logoPublicId = uploadResult.publicId;
+                    }
+                }
+                else if (part.type === 'field') {
+                    if (part.fieldname === "orgName") orgName = part.value as string;
                     if (part.fieldname === "description") description = part.value as string;
                 }
             }
 
-            // 4. Log the final extracted text!
-            console.log("=== 🚀 INCOMING SYSTEM DATA ===");
-            console.log("Name:", companyName);
-            console.log("Type:", type);
-            console.log("Description:", description);
-            console.log("File Included?", fileUploaded);
-            console.log("===============================");
+            if (!orgName) {
+                return reply.status(400).send({ success: false, message: "orgName is required" });
+            }
 
-            return reply.status(200).send({
+            // Next step: Insert { orgName, description, logoUrl } into Drizzle ORM
+            console.log("url and fild name ", orgName, logoUrl)
+            console.log("logoPublicId ", logoPublicId)
+
+            return reply.status(201).send({
                 success: true,
-                message: "Test passed beautifully!",
+                message: "System initialized beautifully!",
+                data: { orgName, logoUrl }
             });
 
         } catch (error) {
-            console.error("❌ Error caught in route:", error);
-            return reply.status(500).send({ success: false, message: "Test failed" });
+            console.error("❌ System Creation Error:", error);
+            return reply.status(500).send({ success: false, message: "Failed to process request" });
         }
     });
 }

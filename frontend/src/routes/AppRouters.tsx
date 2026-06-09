@@ -17,8 +17,8 @@ import Home from "../pages/Home.tsx";
 
 
 import CreatSystem from "@/features/managementApp/features/createSystem/CreatSystem.tsx";
-import Gates from "@/features/managementApp/features/createSystem/family/components/familyGates/Gates.tsx";
-import Manage_Students from "@/features/managementApp/features/createSystem/family/GetUser/Manage_Students.tsx";
+import Gates from "@/features/managementApp/features/createSystem/systems/family/components/familyGates/Gates.tsx";
+import Manage_Students from "@/features/managementApp/features/createSystem/systems/family/GetUser/Manage_Students.tsx";
 import ManagenentApp from "@/features/managementApp/ManagenentApp.tsx";
 import MHome from "@/features/managementApp/pages/MHome.tsx";
 import NotFoundPage from "../NotFoundPage.tsx";

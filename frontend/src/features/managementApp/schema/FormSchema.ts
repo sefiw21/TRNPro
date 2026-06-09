@@ -51,7 +51,7 @@ const formSchema = z.object({
     .and(educationSchema);
 
 const systemFormSchema = z.object({
-    name: z.string().min(1, "System name is required"),
+    orgName: z.string().min(1, "System name is required"),
     type: z.enum(["family", "office"]).nullable(),
     description: z.string().optional(),
     logo: z.instanceof(File)
@@ -63,7 +63,7 @@ type SystemFormDataType = z.infer<typeof systemFormSchema>
 type FormSchemaType = z.infer<typeof formSchema>
 
 const SystemFormDefaultValue: SystemFormDataType = {
-    name: "",
+    orgName: "",
     type: "family",
     description: "",
     logo: null

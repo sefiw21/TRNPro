@@ -1,6 +1,6 @@
 {
-  "id": "ebe22a0f-21f7-4d92-88bc-14530136bd28",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "cef2cba1-a5ae-42ed-a6b8-f82113e92b32",
+  "prevId": "ebe22a0f-21f7-4d92-88bc-14530136bd28",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -87,6 +87,12 @@
         },
         "logo_url": {
           "name": "logo_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "logo_public_id": {
+          "name": "logo_public_id",
           "type": "text",
           "primaryKey": false,
           "notNull": false

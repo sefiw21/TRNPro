@@ -1,6 +1,6 @@
 import { api } from "../../../api/axiosClient.ts";
 import type { ApiResponse, User } from "../../../types/index.ts";
-import type { LoginSchemaType, SignupSchemaType } from "../schemas.tsx";
+import type { LoginSchemaType, SignupSchemaType } from "../schemas/auth.schema.ts";
 export const userAPI = {
   // Create a new user
   async createUser(userData: SignupSchemaType): Promise<ApiResponse<User>> {

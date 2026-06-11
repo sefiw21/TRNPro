@@ -22,7 +22,18 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* THE ALIAS FIX: This teaches TypeScript what @/ means */
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src", "src/features/auth/SignUp.tsx"]
+
+  /* Cleaned up the redundant file declaration */
+  "include": [
+    "src",
+    "src/components/layouts/header/SearchBar.tsx",
+    "src/components/Ui/forms/.tsx"
+  ]
 }

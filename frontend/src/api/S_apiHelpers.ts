@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import type { StudentFormData } from "../features/management/schemas/studentFormSchema.ts";
+import type { StudentFormData } from "../features/managementApp/features/family/schemas/studentFormSchema.ts";
 import type { ApiResponse, StudentDisplay, StudentFromdb } from "./S_api.ts";
 import { FIELD_MAPPING } from "./S_api.ts";
 // --- Helper Functions ---

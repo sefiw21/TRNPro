@@ -1,6 +1,6 @@
 // services/B_api.ts - MODERN, TYPE-SAFE VERSION
+import type { StudentFormData } from "@/features/managementApp/features/createSystem/systems/family/schemas/studentFormSchema.ts";
 import axios, { type AxiosInstance } from "axios";
-import { type StudentFormData } from "../features/management/schemas/studentFormSchema.ts";
 import {
   createStudentFormData,
   createUpdateFormData,

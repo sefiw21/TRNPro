@@ -1,11 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App.tsx";
-import Home from "../components/layouts/Home.tsx";
 import AdminDashboard from "../features/adminDashboard/AdminDashboard.tsx";
-import LogIn from "../features/auth/LogIn.tsx";
-import SignUp from "../features/auth/SignUp.tsx";
-import Manage_Students from "../features/management/adminInterfaces/GetUser/Manage_Students.tsx";
-import Gates from "../features/management/familyGates/Gates.tsx";
+import LogIn from "../features/auth/components/LogIn.tsx";
+import SignUp from "../features/auth/components/SignUp.tsx";
+
 import OralApp from "../features/mental/learn_oral/OralApp.tsx";
 import { LibraryApp } from "../features/mental/library/LibraryApp.tsx";
 import MainContent from "../features/mental/library/MainContent.tsx";
@@ -15,11 +13,18 @@ import Income from "../features/physical/Income.tsx";
 import Phisycal_main from "../features/physical/Phisycal_main.tsx";
 import Prayer from "../features/spiritual/Prayer.tsx";
 import Spritual_main from "../features/spiritual/Spritual_main.tsx";
+import Home from "../pages/Home.tsx";
 
+
+import CreatSystem from "@/features/managementApp/features/createSystem/CreatSystem.tsx";
+import Gates from "@/features/managementApp/features/createSystem/systems/family/components/familyGates/Gates.tsx";
+import Manage_Students from "@/features/managementApp/features/createSystem/systems/family/GetUser/Manage_Students.tsx";
+import ManagenentApp from "@/features/managementApp/ManagenentApp.tsx";
+import MHome from "@/features/managementApp/pages/MHome.tsx";
 import NotFoundPage from "../NotFoundPage.tsx";
-import LandingPageApp from "../pages/landingPage/LandingPageApp.tsx";
-import { ProtectedRoute } from "../pages/ProtectedPages.tsx";
-import PublicPges from "../pages/PublicPges.tsx";
+import LandingPageApp from "../pages/LandingPage.tsx";
+import { ProtectedRoute } from "./ProtectedRoute.tsx";
+import PublicPges from "./PublicRoute.tsx";
 
 export const router = createBrowserRouter([
 
@@ -87,6 +92,14 @@ export const router = createBrowserRouter([
         ],
       },
 
+      {
+        path: "/management",
+        element: <ManagenentApp />,
+        children: [
+          { index: true, element: <MHome /> },
+          { path: "createSystem", element: <CreatSystem /> },
+        ],
+      },
       {
         path: "/choose_family",
         element: <Gates />,

@@ -7,12 +7,18 @@ type MenuBarAndLogoProps = {
   hidden?: boolean;
   SidebarOpen?: boolean;
   home?: boolean;
+  system?: boolean;
+  logoUrl?: string;
+  systemName?: string
 };
 
 export const MenuBarAndLogo = ({
   hidden = false,
   SidebarOpen,
   home,
+  system,
+  logoUrl,
+  systemName
 }: MenuBarAndLogoProps) => {
   const { toggleSidebar } = useSidebarContext();
 
@@ -46,7 +52,7 @@ export const MenuBarAndLogo = ({
           )}
         </Button>
       )}
-      <Logo />
+      <Logo logoUrl={logoUrl} systemName={systemName} system={system} />
     </div>
   );
 };

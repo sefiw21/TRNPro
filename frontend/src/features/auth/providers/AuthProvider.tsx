@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.log("new token : ", response.data.token);
 
         if (response.data && response.data.token) {
-          console.log("DATA from /auth/me:", response.data.user);
+          console.log("DATA from /auth/me:", response.data);
           setUser(response.data.user);
           setAccessToken(response.data.token);
           console.log("User session restored successfully!");

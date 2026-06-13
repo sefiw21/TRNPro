@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import "fastify";
-import * as schema from "../db/schema"; // Adjust this path to your schema
+import * as schema from "../db/schema";
 dotenv.config();
 
 declare module "fastify" {

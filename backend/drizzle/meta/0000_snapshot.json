@@ -1,5 +1,5 @@
 {
-  "id": "ebe22a0f-21f7-4d92-88bc-14530136bd28",
+  "id": "c9d882d8-d2ce-4c63-8723-6ae8276d4402",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -87,6 +87,12 @@
         },
         "logo_url": {
           "name": "logo_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "logo_public_id": {
+          "name": "logo_public_id",
           "type": "text",
           "primaryKey": false,
           "notNull": false

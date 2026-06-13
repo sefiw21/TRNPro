@@ -1,11 +1,11 @@
 export interface User {
-  id: string; // Changed to 'string' (UUIDs from Drizzle are strings, not numbers!)
-  fullName: string; // Changed from full_name
+  id: string;
+  fullName: string;
   email: string;
   profilePicture: string;
   role: "user" | "admin";
-  createdAt: string; // Changed from created_at
-  updatedAt?: string; // Changed from updated_at
+  createdAt: string;
+  updatedAt?: string;
 }
 
 // 3. API Response types

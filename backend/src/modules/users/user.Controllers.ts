@@ -119,7 +119,7 @@ const userController = {
   ) {
     try {
       const { email, password } = request.body;
-      const user = await authService.validateUser(email, password);
+      const user = await authService.validateUser(email!, password);
       if (!user) {
         return reply.status(401).send({ message: "Invalid email or password" });
       }

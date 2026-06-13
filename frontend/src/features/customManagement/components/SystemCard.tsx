@@ -11,7 +11,7 @@ const SystemCard = ({ system }: SystemCardProp) => {
     // const queryClient = useQueryClient();
     const navigate = useNavigate();
     const { id } = useParams();
-
+    // formating date
     const formattedDate = system.createdAt
         ? new Date(system.createdAt).toLocaleDateString('en-US', {
             month: 'short',

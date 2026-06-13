@@ -7,10 +7,10 @@ import { useSingleSystem } from '../../hooks/queries/useSystemInfo';
 
 const SystemHeader = () => {
     const { id } = useParams();
-    console.log(" systemId : ", id)
+    // console.log(" systemId : ", id)
 
     const { data: userSystems, isLoading, isError } = useSingleSystem(id);
-    console.log("Status:", { isLoading, isError, hasData: !!userSystems });
+    // console.log("Status:", { isLoading, isError, hasData: !!userSystems });
 
     const systemName = userSystems?.data?.systemName || (isLoading ? "Loading..." : "Unknown System");
     const description = userSystems?.data?.description || "";

@@ -34,6 +34,8 @@
   "include": [
     "src",
     "src/components/layouts/header/SearchBar.tsx",
-    "src/components/Ui/forms/.tsx"
+    "src/components/Ui/forms/.tsx",
+    "src/features/system/views/.tsx",
+    "src/features/system/views/.tsx"
   ]
 }

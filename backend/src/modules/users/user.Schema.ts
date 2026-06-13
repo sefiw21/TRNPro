@@ -45,12 +45,16 @@ export const googleLoginSchema = z.object({
 // ==========================================
 
 export const userResponseSchema = z.object({
-  id: z.string().uuid({ message: "Invalid user ID format" }),
+  id: z.string(),
   fullName: z.string(),
   email: z.string().nullable(),
   phone: z.string().nullable(),
-  profilePicture: z.string().nullable(),
-  createdAt: z.date(),
+  profilePicture: z.object({
+    url: z.string(),
+    publicId: z.string(),
+    width: z.number().optional(),  // Optional because of the '?' in your types
+    height: z.number().optional(), // Optional because of the '?' in your types
+  }).nullable(), createdAt: z.date(),
   updatedAt: z.date(),
 }).optional();
 

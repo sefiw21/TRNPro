@@ -1,12 +1,12 @@
 import { pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { users } from "../users.js";
 
-export const orgTypeEnum = pgEnum("org_type", ["family", "office"]);
+export const systemTypeEnum = pgEnum("org_type", ["family", "office"]);
 
 export const organizations = pgTable("organizations", {
   id: uuid("id").primaryKey().defaultRandom(),
 
-  name: varchar("name", { length: 255 }).notNull(),
+  systemName: varchar("name", { length: 255 }).notNull(),
   description: text("description"),
 
   // MEDIA
@@ -14,7 +14,7 @@ export const organizations = pgTable("organizations", {
   logoPublicId: text("logo_public_id"),
 
   // ARCHITECTURE & ROUTING
-  orgType: orgTypeEnum("org_type").default("family").notNull(),
+  systemType: systemTypeEnum("org_type").default("family").notNull(),
 
   // OWNERSHIP (Who create the system)
   creatorId: uuid("creator_id")

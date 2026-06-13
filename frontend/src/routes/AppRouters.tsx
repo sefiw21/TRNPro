@@ -16,11 +16,11 @@ import Spritual_main from "../features/spiritual/Spritual_main.tsx";
 import Home from "../pages/Home.tsx";
 
 
-import CreatSystem from "@/features/managementApp/features/createSystem/CreatSystem.tsx";
-import Gates from "@/features/managementApp/features/createSystem/systems/family/components/familyGates/Gates.tsx";
-import Manage_Students from "@/features/managementApp/features/createSystem/systems/family/GetUser/Manage_Students.tsx";
-import ManagenentApp from "@/features/managementApp/ManagenentApp.tsx";
-import MHome from "@/features/managementApp/pages/MHome.tsx";
+import SystemTemplate from "@/features/customManagement/components/SystemTemplate.tsx";
+import CustomManagenent from "@/features/customManagement/CustomManagenent.tsx";
+import ManagementHome from "@/features/customManagement/pages/ManagementHome.tsx";
+import Gates from "@/features/customManagement/variants/family/components/familyGates/Gates.tsx";
+import SystemHome from "@/features/customManagement/views/SystemHomeView.tsx";
 import NotFoundPage from "../NotFoundPage.tsx";
 import LandingPageApp from "../pages/LandingPage.tsx";
 import { ProtectedRoute } from "./ProtectedRoute.tsx";
@@ -94,17 +94,23 @@ export const router = createBrowserRouter([
 
       {
         path: "/management",
-        element: <ManagenentApp />,
+        element: <CustomManagenent />,
         children: [
-          { index: true, element: <MHome /> },
-          { path: "createSystem", element: <CreatSystem /> },
+          { index: true, element: <ManagementHome /> },
+          { path: "createSystem", element: <SystemTemplate /> },
         ],
       },
       {
-        path: "/choose_family",
-        element: <Gates />,
+        path: "/_System/:id",
+        element: <SystemHome />,
+        children: [
+          { index: true, element: <Gates /> }
+        ]
       },
-      { path: "/Family", element: <Manage_Students /> },
+      // {
+      //   path: "/Office_System",
+      //   element: <OfficeSystem />
+      // },
     ],
   },
 

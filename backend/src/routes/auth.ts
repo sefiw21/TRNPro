@@ -28,6 +28,8 @@ export async function authRoutes(fastify: FastifyInstance) {
     },
     userController.createUser,
   );
+
+
   fastify.post<{ Body: GoogleLoginInput }>(
     "/google",
     {

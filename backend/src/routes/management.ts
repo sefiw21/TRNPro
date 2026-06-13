@@ -1,49 +1,31 @@
 import "@fastify/multipart";
 import type { FastifyInstance } from "fastify";
-import { uploadSystemLogo } from "../services/cloudinary.service.js";
-
+import { managementController } from "../modules/management/management.Controllers.js";
+interface CreateSystemRoute {
+    Body: {
+        systemName: string;
+        systemType: "family" | "office";
+        description: string;
+        creatorId: string;
+    }
+}
 export async function managementRoutes(fastify: FastifyInstance) {
-    fastify.post("/createSystem", async (request, reply) => {
-        try {
-            console.log("you arriv backend !!!!!!!!!!!")
+    console.log("data arrive managementRoutes.")
 
-            const parts = request.parts();
-            let orgName = "";
-            let description = "";
-            let logoUrl = "";
-            let logoPublicId = ""
+    fastify.post<CreateSystemRoute>("/createSystem", { onRequest: [fastify.authenticate] },
+        managementController.createSystem
+    );
 
-            for await (const part of parts) {
-                if (part.type === 'file') {
-                    if (part.fieldname === 'logo') {
-                        const uploadResult = await uploadSystemLogo(part.file);
-                        logoUrl = uploadResult.url;
-                        logoPublicId = uploadResult.publicId;
-                    }
-                }
-                else if (part.type === 'field') {
-                    if (part.fieldname === "orgName") orgName = part.value as string;
-                    if (part.fieldname === "description") description = part.value as string;
-                }
-            }
 
-            if (!orgName) {
-                return reply.status(400).send({ success: false, message: "orgName is required" });
-            }
+    fastify.get("/getSystem", { onRequest: [fastify.authenticate] },
+        managementController.getUserSystems
+    );
 
-            // Next step: Insert { orgName, description, logoUrl } into Drizzle ORM
-            console.log("url and fild name ", orgName, logoUrl)
-            console.log("logoPublicId ", logoPublicId)
+    fastify.get<{ Params: { id: string } }>("/getSingleSystem/:id", { onRequest: [fastify.authenticate] },
+        managementController.getSingleSystem
+    );
 
-            return reply.status(201).send({
-                success: true,
-                message: "System initialized beautifully!",
-                data: { orgName, logoUrl }
-            });
-
-        } catch (error) {
-            console.error("❌ System Creation Error:", error);
-            return reply.status(500).send({ success: false, message: "Failed to process request" });
-        }
-    });
+    fastify.delete<{ Params: { id: string } }>("/deleteSingleSystem/:id", { onRequest: [fastify.authenticate] },
+        managementController.deleteSingleSystem
+    );
 }

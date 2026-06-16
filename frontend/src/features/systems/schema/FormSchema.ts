@@ -55,10 +55,10 @@ const systemFormSchema = z.object({
     description: z.string().optional(),
 
 });
-type SystemFormDataType = z.infer<typeof systemFormSchema>
+type SystemFormType = z.infer<typeof systemFormSchema>
 type FormSchemaType = z.infer<typeof formSchema>
 
-const SystemFormDefaultValue: SystemFormDataType = {
+const SystemFormDefaultValue: SystemFormType = {
     systemName: "",
     description: "",
 }
@@ -72,7 +72,7 @@ const formDefaultValue: FormSchemaType = {
 export {
     formDefaultValue, formSchema, SystemFormDefaultValue, systemFormSchema,
     type FormSchemaType,
-    type SystemFormDataType
+    type SystemFormType
 };
 
 

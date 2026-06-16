@@ -16,7 +16,6 @@ export async function managementRoutes(fastify: FastifyInstance) {
         managementController.createSystem
     );
 
-
     fastify.get("/getSystem", { onRequest: [fastify.authenticate] },
         managementController.getUserSystems
     );

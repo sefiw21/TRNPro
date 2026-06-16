@@ -39,7 +39,7 @@ const Home = () => {
   const features = [
     {
       name: "Management",
-      url: "/management",
+      url: "/systems",
       description: "Architect the geometry of your daily existence with crystalline precision.",
       icon: LayoutDashboard,
       // "Bioluminescent Grid" - Deep cyan shifting through bright emerald into dark teal
@@ -113,7 +113,7 @@ const Home = () => {
       img: youtube,
     },
     {
-      name: "Lisane Orthodox – ልሳነ ኦርቶዶክስ",
+      name: "Lisane Orthodox - ልሳነ ኦርቶዶክስ",
       url: "http://www.youtube.com/@lisaneorthodox",
       description: "Comprehensive teachings, dogmatic lessons, and Tewahedo updates.",
       img: youtube,

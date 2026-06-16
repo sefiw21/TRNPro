@@ -1,10 +1,10 @@
 import { api } from "@/api/axiosClient";
-import type { SystemFormDataType } from "@/features/customManagement/schema/FormSchema";
+import type { SystemFormType } from "@/features/systems/schema/FormSchema";
 import type { Company, MApiResponse } from "../types/createSystemtype";
 
 export const createSystemAPI = {
 
-    async createSystem(formData: SystemFormDataType): Promise<MApiResponse<Company>> {
+    async createSystem(formData: SystemFormType): Promise<MApiResponse<Company>> {
         try {
             console.log("formData info : ", formData)
 
@@ -58,6 +58,21 @@ export const createSystemAPI = {
             console.log("/management/deleteSingleSystem")
             const response = await api.delete<MApiResponse<Company>>(
                 `/management/deleteSingleSystem/${systemId}`,
+            );
+            console.log("deleteSingleSystem: ", response.data.data)
+            return response.data;
+        } catch (error: any) {
+
+            throw new Error(
+                error.response?.data?.message || "Failed to delete system. Please try again."
+            );
+        }
+    },
+    async updateSystem(systemId?: string, updates?: Partial<SystemFormType>): Promise<MApiResponse<Company>> {
+        try {
+            console.log("/management/deleteSingleSystem")
+            const response = await api.delete<MApiResponse<Company>>(
+                `/management/deleteSingleSystem/${systemId}/${updates}`,
             );
             console.log("deleteSingleSystem: ", response.data.data)
             return response.data;

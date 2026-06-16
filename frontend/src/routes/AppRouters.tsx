@@ -16,11 +16,15 @@ import Spritual_main from "../features/spiritual/Spritual_main.tsx";
 import Home from "../pages/Home.tsx";
 
 
-import SystemTemplate from "@/features/customManagement/components/SystemTemplate.tsx";
-import CustomManagenent from "@/features/customManagement/CustomManagenent.tsx";
-import ManagementHome from "@/features/customManagement/pages/ManagementHome.tsx";
-import Gates from "@/features/customManagement/variants/family/components/familyGates/Gates.tsx";
-import SystemHome from "@/features/customManagement/views/SystemHomeView.tsx";
+import SystemTemplate from "@/features/systems/components/SystemTemplate.tsx";
+import SystemDashboardLayout from "@/features/systems/layouts/dashboard/SystemDashboardLayout.tsx";
+import SystemWorkspaceLayout from "@/features/systems/layouts/workspace/SystemWorkspaceLayout.tsx";
+import Members from "@/features/systems/pages/Members.tsx";
+import Roles from "@/features/systems/pages/Roles.tsx";
+import { SystemsDashboard } from "@/features/systems/pages/SystemsDashboard.tsx";
+import SystemsWorkspace from "@/features/systems/pages/SystemsWorkspace.tsx";
+import FormBuilder from "@/features/systems/sub-features/formBuilder/FormBuilder.tsx";
+import { Settings } from "lucide-react";
 import NotFoundPage from "../NotFoundPage.tsx";
 import LandingPageApp from "../pages/LandingPage.tsx";
 import { ProtectedRoute } from "./ProtectedRoute.tsx";
@@ -93,19 +97,26 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/management",
-        element: <CustomManagenent />,
+        path: "/systems",
+        element: <SystemDashboardLayout />,
         children: [
-          { index: true, element: <ManagementHome /> },
-          { path: "createSystem", element: <SystemTemplate /> },
+          { index: true, element: <SystemsDashboard /> },
+          { path: "create-system", element: <SystemTemplate /> },
+
         ],
       },
       {
-        path: "/_System/:id",
-        element: <SystemHome />,
+        path: "/systems/:id",
+        element: <SystemWorkspaceLayout />,
         children: [
-          { index: true, element: <Gates /> }
+          { index: true, element: <SystemsWorkspace /> },
+          { path: "FormBuilder", element: <FormBuilder /> },
+          { path: "Members", element: <Members /> },
+          { path: "Roles", element: <Roles /> },
+          { path: "Settings", element: <Settings /> },
+
         ]
+
       },
       // {
       //   path: "/Office_System",

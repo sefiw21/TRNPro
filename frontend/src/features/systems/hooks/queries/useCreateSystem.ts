@@ -1,6 +1,6 @@
 
-import { createSystemAPI } from '@/features/customManagement/service/System.service';
-import type { Company } from '@/features/customManagement/types/createSystemtype';
+import { createSystemAPI } from '@/features/systems/service/System.service';
+import type { Company } from '@/features/systems/types/createSystemtype';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface CreateSysetemData {

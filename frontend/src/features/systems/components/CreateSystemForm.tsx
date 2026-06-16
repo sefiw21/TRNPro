@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { useCreateSystem } from "../hooks/queries/useCreateSystem";
-import { SystemFormDefaultValue, systemFormSchema, type SystemFormDataType } from "../schema/FormSchema";
+import { SystemFormDefaultValue, systemFormSchema, type SystemFormType } from "../schema/FormSchema";
 import { useCreateSystemStore } from "../store/useCreateSystemStore";
 import { useSystemActions } from '../store/useSystemStore';
 interface CreateSysetemProps {
@@ -21,24 +21,25 @@ const CreateSysetemForm = ({ isOpen, onClose, systemType }: CreateSysetemProps) 
     const nameLabel = isFamily ? "Family Name" : "Organization Name";
     const namePlaceholder = isFamily ? "e.g., The Smith Household" : "e.g., Acme Corp";
     const { closeForm } = useCreateSystemStore();
+    const { setSystemValues } = useSystemActions();
+
     const navigate = useNavigate();
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors, isValid }
-    } = useForm<SystemFormDataType>({
+    } = useForm<SystemFormType>({
         resolver: zodResolver(systemFormSchema),
         defaultValues: SystemFormDefaultValue,
         mode: "onChange",
     });
     console.log("selected system type : ", systemType)
-    const { setSystemValues } = useSystemActions();
 
 
     const { mutateAsync, isPending } = useCreateSystem();
 
-    const onSubmit = async (data: SystemFormDataType) => {
+    const onSubmit = async (data: SystemFormType) => {
         try {
             const orgData = {
                 ...data,
@@ -57,7 +58,7 @@ const CreateSysetemForm = ({ isOpen, onClose, systemType }: CreateSysetemProps) 
             closeForm();
 
             // 4. Navigate using the ID from the response (assuming it has an .id property)
-            navigate(`/_System/${response.id}`);
+            navigate(`/systems/${response.id}`);
 
         } catch (error) {
             // If the API throws an error, it gets caught here automatically

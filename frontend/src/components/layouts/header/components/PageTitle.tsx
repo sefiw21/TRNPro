@@ -1,6 +1,6 @@
 
 interface PageTitleProps {
-    title: string;
+    title?: string;
     subtitle?: string;
 }
 

@@ -1,4 +1,4 @@
-// Expose all here to Drizzle!
+// Expose all to Drizzle!
 export * from "./activity.js";
 export * from "./management.schemas/management.js";
 export * from "./schemaEnums.js";
